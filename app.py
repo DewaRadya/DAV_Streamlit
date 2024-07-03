@@ -8,12 +8,13 @@ df = pd.read_csv('Cleaning_TBC.csv')
 
 st.set_page_config(layout="wide", initial_sidebar_state="expanded")
 
+
 # style CSS
 st.markdown(
     """
     <style>
     .main .block-container {
-        padding: 3rem 3rem;
+        padding: 2rem 2rem;
         
     }
     .css-1lcbmhc.e1fqkh3o1 {
@@ -77,17 +78,18 @@ col1, col2, col3 = st.columns(3)
 # Total deaths for the selected country
 with col1:
     total_deaths_country = int(filtered_df[disease_type].sum())
-    st.metric(label=f'Total {disease_name} di {selected_country}', value=total_deaths_country)
-
+    st.markdown(f"<h6 style='font-weight: bold;'>Total {disease_name} di {selected_country}</h6>", unsafe_allow_html=True)
+    st.metric(label='', value=total_deaths_country)
 # Total deaths for all years for the selected country
 with col2:
     total_deaths_all_years = int(df[(df['Region'] == selected_region) & (df['Country'] == selected_country)][disease_type].sum())
-    st.metric(label=f'Total {disease_name} di {selected_country} (Semua Tahun)', value=f"{total_deaths_all_years}")
-
+    st.markdown(f"<h6 style='font-weight: bold;'>Total {disease_name} di {selected_country} (Semua Tahun)</h6>", unsafe_allow_html=True)
+    st.metric(label='', value=f"{total_deaths_all_years}")
 # Additional value - average deaths per year for the selected country
 with col3:
     avg_deaths_per_year = filtered_df[disease_type].mean()
-    st.metric(label=f'Rata-rata {disease_name} per Tahun di {selected_country}', value=f"{avg_deaths_per_year:.1f}")
+    st.markdown(f"<h6 style='font-weight: bold;'>Rata-rata {disease_name} per Tahun di {selected_country}</h6>", unsafe_allow_html=True)
+    st.metric(label='', value=f"{avg_deaths_per_year:.1f}")
 
 
 # Pemilihan Map
@@ -107,7 +109,7 @@ with st.container():
                 color_continuous_scale=color_scale,  # Skema warna
                 projection="natural earth",  # Proyeksi peta (dalam hal ini, bumi alami)
                 title=f"{disease_name} di {selected_country}",  # Menggunakan selected_country dari selectbox negara
-                template='plotly_dark'  # Using a dark template for a clean look
+                template='plotly_white'  # Using a dark template for a clean look
             )
 
             # Mendefinisikan interaktivitas di peta
