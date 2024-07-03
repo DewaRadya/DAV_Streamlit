@@ -13,7 +13,7 @@ st.markdown(
     """
     <style>
     .main .block-container {
-        padding: 2rem 2rem;
+        padding: 3rem 3rem;
         
     }
     .css-1lcbmhc.e1fqkh3o1 {
