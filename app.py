@@ -14,7 +14,7 @@ st.markdown(
     """
     <style>
     .main .block-container {
-        padding: 1.5rem 1.5rem;
+        padding: 1rem 1rem;
         
     }
     .css-1lcbmhc.e1fqkh3o1 {
