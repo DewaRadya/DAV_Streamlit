@@ -40,10 +40,12 @@ st.markdown(
     unsafe_allow_html=True
 )
 
+st.markdown("<h1 style='text-align: center;'>Persebaran TBC di Seluruh Dunia</h1>", unsafe_allow_html=True)
+
 # sidebar for navigation
 # Sidebar
 with st.sidebar:
-    st.markdown("<h1 style='text-align: center;'>TBC di DUNIA</h1>", unsafe_allow_html=True)
+    st.markdown("<h1 style='text-align: center;'>MENU</h1>", unsafe_allow_html=True)
 
     selected_region = st.selectbox('Filter memilih region', df['Region'].unique())
 
@@ -78,18 +80,18 @@ col1, col2, col3 = st.columns(3)
 # Total deaths for the selected country
 with col1:
     total_deaths_country = int(filtered_df[disease_type].sum())
-    st.markdown(f"<h6 style='font-weight: bold;'>Total {disease_name} di {selected_country}</h6>", unsafe_allow_html=True)
-    st.metric(label='', value=total_deaths_country)
+    st.metric(label=f'Total {disease_name} di {selected_country}', value=total_deaths_country)
+
 # Total deaths for all years for the selected country
 with col2:
     total_deaths_all_years = int(df[(df['Region'] == selected_region) & (df['Country'] == selected_country)][disease_type].sum())
-    st.markdown(f"<h6 style='font-weight: bold;'>Total {disease_name} di {selected_country} (Semua Tahun)</h6>", unsafe_allow_html=True)
-    st.metric(label='', value=f"{total_deaths_all_years}")
+    st.metric(label=f'Total {disease_name} di {selected_country} (Semua Tahun)', value=f"{total_deaths_all_years}")
+
 # Additional value - average deaths per year for the selected country
 with col3:
     avg_deaths_per_year = filtered_df[disease_type].mean()
-    st.markdown(f"<h6 style='font-weight: bold;'>Rata-rata {disease_name} per Tahun di {selected_country}</h6>", unsafe_allow_html=True)
-    st.metric(label='', value=f"{avg_deaths_per_year:.1f}")
+    st.metric(label=f'Rata-rata {disease_name} per Tahun di {selected_country}', value=f"{avg_deaths_per_year:.1f}")
+
 
 
 # Pemilihan Map
