@@ -90,41 +90,6 @@ with col3:
     st.metric(label=f'Rata-rata {disease_name} per Tahun di {selected_country}', value=f"{avg_deaths_per_year:.1f}")
 
 
-# # Filter berdasarkan region
-# with col1:
-#     selected_region = st.selectbox('Filter memilih region', df['Region'].unique())
-
-# # Filter negara berdasarkan region yang dipilih
-# filtered_countries = df[df['Region'] == selected_region]['Country'].unique()
-
-# with col2:
-#     selected_country = st.selectbox('Filter memilih negara', filtered_countries)
-
-# # Kamus untuk mengonversi nama tabel menjadi nama penyakit
-# disease_dict = {
-#         'Prevalensi TBC': 'TB_prevalence',
-#         'Mortalitas TBC': 'TB_mortality',
-#         'Kematian TBC': 'TB_deaths',
-#         'Mortalitas TBC-HIV': 'TB_HIV_mortality',
-#         'Kematian TBC-HIV': 'TB_HIV_deaths',
-#         'Insiden TBC': 'TB_incidence',
-#         'Insiden TBC-HIV': 'TB_HIV_incidence'
-# }
-
-# with col3:
-#     disease_name = st.selectbox('Pilih Jenis Penyakit', list(disease_dict.keys()))
-#     disease_type = disease_dict[disease_name]
-
-# with col4:
-#     year_range = st.slider('Filter tahun', int(df['Year'].min()), int(df['Year'].max()), (int(df['Year'].min()), int(df['Year'].max())))
-
-# # Filter data berdasarkan pilihan pengguna
-# filtered_df = df[
-#     (df['Region'] == selected_region) &
-#     (df['Country'] == selected_country) &
-#     (df['Year'].between(year_range[0], year_range[1]))
-# ]
-
 # Pemilihan Map
 # Pemilihan Map
 with st.container():
@@ -142,7 +107,7 @@ with st.container():
                 color_continuous_scale=color_scale,  # Skema warna
                 projection="natural earth",  # Proyeksi peta (dalam hal ini, bumi alami)
                 title=f"{disease_name} di {selected_country}",  # Menggunakan selected_country dari selectbox negara
-                template='plotly_white'  # Using a dark template for a clean look
+                template='plotly_dark'  # Using a dark template for a clean look
             )
 
             # Mendefinisikan interaktivitas di peta
@@ -197,35 +162,3 @@ with col2:
             )
         st.plotly_chart(fig_bar, use_container_width=True)
 
-
-# # Line chart
-# if not filtered_df.empty:
-#     fig_line = go.Figure()
-
-#     fig_line.add_trace(go.Scatter(
-#         x=filtered_df['Year'], 
-#         y=filtered_df[disease_type], 
-#         mode='lines+markers+text', 
-#         name=disease_type, 
-#         line=dict(color='orange'),
-#         text=filtered_df[disease_type],  # Add this line to show values
-#         textposition='top center'  # Position the text labels
-#     ))
-
-#     fig_line.add_trace(go.Scatter(
-#         x=filtered_df['Year'], 
-#         y=filtered_df[disease_type+'_low'], 
-#         mode='lines+markers+text', 
-#         name=disease_type+'_low', 
-#         line=dict(color='blue'),
-#         text=filtered_df[disease_type+'_low'],  # Add this line to show values
-#         textposition='top center'  # Position the text labels
-#     ))
-
-#     fig_line.update_layout(
-#         title=f"{disease_name} over Time",
-#         xaxis_title='Year',
-#         yaxis_title=disease_name
-#     )
-
-#     st.plotly_chart(fig_line, use_container_width=True)
